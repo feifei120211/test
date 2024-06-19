@@ -41,12 +41,12 @@ def extract_body_text(html):
     return text
 
 def generate_wordcloud(text):
-    # Assuming the font file is in the same directory as the script
+    # 假设字体文件位于脚本所在的同一目录
     script_dir = os.path.dirname(os.path.abspath(__file__))
     font_path = os.path.join(script_dir, 'simhei.ttf')
     
     if not os.path.exists(font_path):
-        raise FileNotFoundError(f"The font file '{font_path}' does not exist. Please check the path and ensure the file is available.")
+        raise FileNotFoundError(f"字体文件'{font_path}'不存在。请检查路径并确保文件可用。")
     
     wordcloud = WordCloud(font_path=font_path, width=800, height=400, background_color='white').generate(text)
     return wordcloud
