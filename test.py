@@ -10,7 +10,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-
+import os
 LOGGER = get_logger(__name__)
 
 # 定义数据清洗函数
@@ -41,9 +41,14 @@ def extract_body_text(html):
     return text
 
 def generate_wordcloud(text):
-    wordcloud = WordCloud(font_path='simhei.ttf',  # 设置字体路径，确保支持中文
-                          width=800, height=400,
-                          background_color='white').generate(text)
+    # Assuming the font file is in the same directory as the script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    font_path = os.path.join(script_dir, 'simhei.ttf')
+    
+    if not os.path.exists(font_path):
+        raise FileNotFoundError(f"The font file '{font_path}' does not exist. Please check the path and ensure the file is available.")
+    
+    wordcloud = WordCloud(font_path=font_path, width=800, height=400, background_color='white').generate(text)
     return wordcloud
 
 def run():
