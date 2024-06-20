@@ -22,7 +22,7 @@ def clean_text(text):
 
 # 定义分词函数
 def segment(text):
-    stopwords = ['的', '了', '在', '是', '我', '你', '他', '她', '对','它', '们', '人','这', '仅','那', '之', '与', '和', '或','等','虽然','大','更','多', '但是', '然而', '因此','条','年']
+    stopwords = ['的', '了', '在', '是', '我', '你', '他', '中','为','新','让','她', '对','它', '们', '人','这', '仅','那', '之', '与', '和', '或','等','虽然','大','更','多', '但是', '然而', '因此','条','年']
     punctuation = "、，。！？；：　“”‘’~@#￥%……&*（）【】｛｝+-*/=《》<>「」『』【】〔〕｟｠«»“”‘’'':;,/\\|[]{}()$^↑"
     text = text.translate(str.maketrans("", "", punctuation)).replace('\n', '')
     words = jieba.lcut(text)
@@ -48,7 +48,7 @@ def generate_wordcloud(text):
     if not os.path.exists(font_path):
         raise FileNotFoundError(f"字体文件'{font_path}'不存在。请检查路径并确保文件可用。")
     
-    wordcloud = WordCloud(font_path=font_path, width=800, height=400, background_color='white').generate(text)
+    wordcloud = WordCloud(font_path=font_path, width=800, height=400, background_color='pink').generate(text)
     return wordcloud
 
 def run():
@@ -72,7 +72,7 @@ def run():
         st.write(f"The most common word is '{most_common_word}' with a count of {most_common_count}")
         top_words = word_counts.most_common(20)
         wordcloud_options = {
-          "tooltip": {
+          "tooltip": {   
             "trigger": 'item',
             "formatter": '{b} : {c}'
           },
